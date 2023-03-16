@@ -1,6 +1,9 @@
 package gui;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class App {
     public JFrame frame;
@@ -27,6 +30,7 @@ public class App {
     private JCheckBox HFCheckBox;
     private JCheckBox HashCheckBox;
     private JCheckBox SBCheckBox;
+    JCheckBox[] extractorCheckBoxes;
     private JButton buttonExtractorSetup;
     private JPanel panelNISTCheckBoxes;
     private JCheckBox FrequencyCheckBox;
@@ -44,6 +48,7 @@ public class App {
     private JCheckBox REVCheckBox;
     private JCheckBox SCheckBox;
     private JCheckBox LCCheckBox;
+    private JCheckBox[] nistCheckBoxes;
     private JButton buttonNISTSetup;
     private JPanel XORCard = new JPanel();
     private JPanel VNCard = new JPanel();
@@ -67,14 +72,16 @@ public class App {
 
     public void setup(){
         setupExtractorCheckboxes();
+        setupCheckBoxButton(buttonExtractorSetup, extractorCheckBoxes);
         setupNISTCheckBoxes();
+        setupCheckBoxButton(buttonNISTSetup, nistCheckBoxes);
     }
 
     public void setupExtractorCheckboxes(){
         panelExtractorCheckBoxes.setLayout(new BoxLayout(panelExtractorCheckBoxes, BoxLayout.Y_AXIS));
-        JCheckBox[] checkBoxes = {XORCheckBox, VNCheckBox, IVNCheckBox, NVNCheckBox, HFCheckBox, HashCheckBox, SBCheckBox};
+        extractorCheckBoxes = new JCheckBox[]{XORCheckBox, VNCheckBox, IVNCheckBox, NVNCheckBox, HFCheckBox, HashCheckBox, SBCheckBox};
         String[] labels = {"XOR", "Von Neumann", "Iterating VN", "N bit VN", "H function", "Hash", "S-box"};
-        checkBoxSetup(panelExtractorCheckBoxes, checkBoxes, labels);
+        checkBoxSetup(panelExtractorCheckBoxes, extractorCheckBoxes, labels);
 
         buttonExtractorSetup = new JButton("Setup");
         panelExtractorCheckBoxes.add(buttonExtractorSetup);
@@ -82,9 +89,9 @@ public class App {
 
     public void setupNISTCheckBoxes(){
         panelNISTCheckBoxes.setLayout(new BoxLayout(panelNISTCheckBoxes, BoxLayout.Y_AXIS));
-        JCheckBox[] checkBoxes = {FrequencyCheckBox, BFCheckBox, CuSumCheckbox, RunsCheckBox, LongestRunCheckBox, RankCheckBox, DFTCheckBox, NTCheckBox, OTCheckBox, USCheckBox, AECheckBox, RECheckBox, REVCheckBox, SCheckBox, LCCheckBox,};
+        nistCheckBoxes = new JCheckBox[]{FrequencyCheckBox, BFCheckBox, CuSumCheckbox, RunsCheckBox, LongestRunCheckBox, RankCheckBox, DFTCheckBox, NTCheckBox, OTCheckBox, USCheckBox, AECheckBox, RECheckBox, REVCheckBox, SCheckBox, LCCheckBox,};
         String[] labels = {"Frequency", "Block Frequency", "Cumulative Sums", "Runs", "Longest Run of Ones", "Rank", "Discrete Fourier Transform", "Nonperiodic Template Matchings", "Overlapping Template Matchings", "Universal Statistical", "Approximate Entropy", "Random Excursions", "Random Excursions Variant", "Serial", "Linear Complexity"};
-        checkBoxSetup(panelNISTCheckBoxes, checkBoxes, labels);
+        checkBoxSetup(panelNISTCheckBoxes, nistCheckBoxes, labels);
 
         buttonNISTSetup = new JButton("Setup");
         panelNISTCheckBoxes.add(buttonNISTSetup);
@@ -96,6 +103,20 @@ public class App {
             panel.add(checkBoxes[i]);
         }
     }
+
+    public void setupCheckBoxButton(JButton button, JCheckBox[] checkBoxArray){
+        button.addActionListener(e -> {
+            int i = 0;
+            boolean[] ticks = new boolean[checkBoxArray.length];
+            for (JCheckBox checkbox : checkBoxArray
+                 ) {
+                ticks[i++] = checkbox.isSelected();
+            }
+            System.out.println(Arrays.toString(ticks));
+        });
+    }
+
+
 
     public static void main(String[] args) {
         App app = new App();
