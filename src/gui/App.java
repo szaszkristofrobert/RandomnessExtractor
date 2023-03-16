@@ -72,9 +72,9 @@ public class App {
 
     public void setup(){
         setupExtractorCheckboxes();
-        setupCheckBoxButton(buttonExtractorSetup, extractorCheckBoxes);
+        setupCheckBoxButton(panelExtractorCheckBoxes, buttonExtractorSetup, extractorCheckBoxes);
         setupNISTCheckBoxes();
-        setupCheckBoxButton(buttonNISTSetup, nistCheckBoxes);
+        setupCheckBoxButton(panelNISTCheckBoxes, buttonNISTSetup, nistCheckBoxes);
     }
 
     public void setupExtractorCheckboxes(){
@@ -82,9 +82,6 @@ public class App {
         extractorCheckBoxes = new JCheckBox[]{XORCheckBox, VNCheckBox, IVNCheckBox, NVNCheckBox, HFCheckBox, HashCheckBox, SBCheckBox};
         String[] labels = {"XOR", "Von Neumann", "Iterating VN", "N bit VN", "H function", "Hash", "S-box"};
         checkBoxSetup(panelExtractorCheckBoxes, extractorCheckBoxes, labels);
-
-        buttonExtractorSetup = new JButton("Setup");
-        panelExtractorCheckBoxes.add(buttonExtractorSetup);
     }
 
     public void setupNISTCheckBoxes(){
@@ -92,9 +89,6 @@ public class App {
         nistCheckBoxes = new JCheckBox[]{FrequencyCheckBox, BFCheckBox, CuSumCheckbox, RunsCheckBox, LongestRunCheckBox, RankCheckBox, DFTCheckBox, NTCheckBox, OTCheckBox, USCheckBox, AECheckBox, RECheckBox, REVCheckBox, SCheckBox, LCCheckBox,};
         String[] labels = {"Frequency", "Block Frequency", "Cumulative Sums", "Runs", "Longest Run of Ones", "Rank", "Discrete Fourier Transform", "Nonperiodic Template Matchings", "Overlapping Template Matchings", "Universal Statistical", "Approximate Entropy", "Random Excursions", "Random Excursions Variant", "Serial", "Linear Complexity"};
         checkBoxSetup(panelNISTCheckBoxes, nistCheckBoxes, labels);
-
-        buttonNISTSetup = new JButton("Setup");
-        panelNISTCheckBoxes.add(buttonNISTSetup);
     }
 
     public void checkBoxSetup(JPanel panel, JCheckBox[] checkBoxes, String[] labels){
@@ -104,7 +98,9 @@ public class App {
         }
     }
 
-    public void setupCheckBoxButton(JButton button, JCheckBox[] checkBoxArray){
+    public void setupCheckBoxButton(JPanel panel, JButton button, JCheckBox[] checkBoxArray){
+        button = new JButton("Setup");
+        panel.add(button);
         button.addActionListener(e -> {
             int i = 0;
             boolean[] ticks = new boolean[checkBoxArray.length];
