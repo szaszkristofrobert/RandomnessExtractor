@@ -1,8 +1,6 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class App {
@@ -50,13 +48,8 @@ public class App {
     private JCheckBox LCCheckBox;
     private JCheckBox[] nistCheckBoxes;
     private JButton buttonNISTSetup;
-    private JPanel XORCard = new JPanel();
-    private JPanel VNCard = new JPanel();
-    private JPanel IVNCard = new JPanel();
-    private JPanel NVNCard = new JPanel();
-    private JPanel HFCard = new JPanel();
-    private JPanel HashCard = new JPanel();
-    private JPanel SBCard = new JPanel();
+    boolean[] extractorTicks;
+    boolean[] nistTicks;
 
     public App(){
         frame = new JFrame("App");
@@ -72,9 +65,9 @@ public class App {
 
     public void setup(){
         setupExtractorCheckboxes();
-        setupCheckBoxButton(panelExtractorCheckBoxes, buttonExtractorSetup, extractorCheckBoxes);
+        setupCheckBoxButton(panelExtractorCheckBoxes, buttonExtractorSetup, extractorCheckBoxes, false);
         setupNISTCheckBoxes();
-        setupCheckBoxButton(panelNISTCheckBoxes, buttonNISTSetup, nistCheckBoxes);
+        setupCheckBoxButton(panelNISTCheckBoxes, buttonNISTSetup, nistCheckBoxes, true);
     }
 
     public void setupExtractorCheckboxes(){
@@ -98,23 +91,149 @@ public class App {
         }
     }
 
-    public void setupCheckBoxButton(JPanel panel, JButton button, JCheckBox[] checkBoxArray){
+    public void setupCheckBoxButton(JPanel panel, JButton button, JCheckBox[] checkBoxArray, boolean nist){
         button = new JButton("Setup");
         panel.add(button);
+        boolean[] ticks = new boolean[checkBoxArray.length];
         button.addActionListener(e -> {
             int i = 0;
-            boolean[] ticks = new boolean[checkBoxArray.length];
             for (JCheckBox checkbox : checkBoxArray
                  ) {
                 ticks[i++] = checkbox.isSelected();
             }
             System.out.println(Arrays.toString(ticks));
+            if (nist)
+                nistTicks = ticks;
+            else
+                extractorTicks = ticks;
+            displayCards(nist);
         });
     }
 
-
+    public void displayCards(boolean nist){
+        if (nist)
+            //handleNistCards();
+            System.out.println("TODO: handle nist cards");
+        else
+            displayNextExtractorCard(0);
+    }
+    public void displayNextExtractorCard(int startWith) {
+        XORCard xorCard = new XORCard();
+        VNCard vnCard = new VNCard();
+        IVNCard ivnCard = new IVNCard();
+        NVNCard nvnCard = new NVNCard();
+        HFCard hfCard = new HFCard();
+        HashCard hashCard = new HashCard();
+        SBCard sbCard = new SBCard();
+        Card[] cards = {xorCard, vnCard, ivnCard, nvnCard, hfCard, hashCard, sbCard};
+        ExtractorIFrame.removeAll();
+        ExtractorIFrame.revalidate();
+        ExtractorIFrame.repaint();
+        for (int i = startWith; i < cards.length; i++){
+            if (extractorTicks[i]) {
+                ExtractorIFrame.add(cards[i]);
+                break;
+            }
+        }
+    }
 
     public static void main(String[] args) {
         App app = new App();
+    }
+
+    public abstract static class Card extends JPanel{
+        JButton buttonContinue;
+        public Card(){
+            super();
+            buttonContinue = new JButton("Continue");
+            buttonContinue.addActionListener(e -> {
+                nextCard();
+            });
+        }
+        public abstract void nextCard();
+    }
+    public class XORCard extends Card{
+        public XORCard(){
+            super();
+            JLabel label = new JLabel("XOR");
+            this.add(label);
+            this.add(buttonContinue);
+        }
+        @Override
+        public void nextCard(){
+            displayNextExtractorCard(1);
+        }
+    }
+    public class VNCard extends Card{
+        public VNCard(){
+            super();
+            JLabel label = new JLabel("VN");
+            this.add(label);
+            this.add(buttonContinue);
+        }
+        @Override
+        public void nextCard(){
+            displayNextExtractorCard(2);
+        }
+    }
+    public class IVNCard extends Card{
+        public IVNCard(){
+            super();
+            JLabel label = new JLabel("IVN");
+            this.add(label);
+            this.add(buttonContinue);
+        }
+        @Override
+        public void nextCard(){
+            displayNextExtractorCard(3);
+        }
+    }
+    public class NVNCard extends Card{
+        public NVNCard(){
+            super();
+            JLabel label = new JLabel("NVN");
+            this.add(label);
+            this.add(buttonContinue);
+        }
+        @Override
+        public void nextCard(){
+            displayNextExtractorCard(4);
+        }
+    }
+    public class HFCard extends Card{
+        public HFCard(){
+            super();
+            JLabel label = new JLabel("HF");
+            this.add(label);
+            this.add(buttonContinue);
+        }
+        @Override
+        public void nextCard(){
+            displayNextExtractorCard(5);
+        }
+    }
+    public class HashCard extends Card{
+        public HashCard(){
+            super();
+            JLabel label = new JLabel("Hash");
+            this.add(label);
+            this.add(buttonContinue);
+        }
+        @Override
+        public void nextCard(){
+            displayNextExtractorCard(6);
+        }
+    }
+    public class SBCard extends Card{
+        public SBCard(){
+            super();
+            JLabel label = new JLabel("SB");
+            this.add(label);
+            this.add(buttonContinue);
+        }
+        @Override
+        public void nextCard(){
+            displayNextExtractorCard(7);
+        }
     }
 }
