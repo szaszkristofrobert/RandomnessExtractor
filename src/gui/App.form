@@ -37,7 +37,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="59dcb" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+              <grid id="59dcb" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -45,21 +45,21 @@
                 <border type="none"/>
                 <children>
                   <component id="585f0" class="javax.swing.JTextField" binding="textFieldExtractorInput">
-                    <constraints/>
+                    <constraints border-constraint="Center"/>
                     <properties>
-                      <text value="extractor input file location"/>
+                      <text value="extractor input file"/>
                       <toolTipText value=""/>
                     </properties>
                   </component>
                   <component id="b1386" class="javax.swing.JButton" binding="ExtractorInputBrowseButton">
-                    <constraints/>
+                    <constraints border-constraint="East"/>
                     <properties>
                       <text value="Browse"/>
                     </properties>
                   </component>
                 </children>
               </grid>
-              <grid id="71a6f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+              <grid id="71a6f" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -67,14 +67,14 @@
                 <border type="none"/>
                 <children>
                   <component id="2a20d" class="javax.swing.JTextField" binding="textFieldExtractorOutput">
-                    <constraints/>
+                    <constraints border-constraint="Center"/>
                     <properties>
                       <text value="extractor output file location"/>
                       <toolTipText value=""/>
                     </properties>
                   </component>
                   <component id="7843f" class="javax.swing.JButton" binding="ExtractorOutputBrowseButton">
-                    <constraints/>
+                    <constraints border-constraint="East"/>
                     <properties>
                       <text value="Browse"/>
                     </properties>
@@ -146,7 +146,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="1fbde" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+              <grid id="1fbde" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -154,21 +154,21 @@
                 <border type="none"/>
                 <children>
                   <component id="adcb1" class="javax.swing.JTextField" binding="textFieldNISTInput">
-                    <constraints/>
+                    <constraints border-constraint="Center"/>
                     <properties>
                       <text value="nist input file location"/>
                       <toolTipText value=""/>
                     </properties>
                   </component>
                   <component id="7d196" class="javax.swing.JButton" binding="NISTInputBrowseButton">
-                    <constraints/>
+                    <constraints border-constraint="East"/>
                     <properties>
                       <text value="Browse"/>
                     </properties>
                   </component>
                 </children>
               </grid>
-              <grid id="6bc26" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+              <grid id="6bc26" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -176,14 +176,14 @@
                 <border type="none"/>
                 <children>
                   <component id="ee386" class="javax.swing.JTextField" binding="textFieldNISTOutput">
-                    <constraints/>
+                    <constraints border-constraint="Center"/>
                     <properties>
                       <text value="nist output file location"/>
                       <toolTipText value=""/>
                     </properties>
                   </component>
                   <component id="af1" class="javax.swing.JButton" binding="NISTOutputBrowseButton">
-                    <constraints/>
+                    <constraints border-constraint="East"/>
                     <properties>
                       <text value="Browse"/>
                     </properties>
