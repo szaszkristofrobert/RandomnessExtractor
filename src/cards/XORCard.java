@@ -1,6 +1,7 @@
 package cards;
 
 import gui.App;
+import file_manager.FileManager;
 
 import javax.swing.*;
 import java.io.File;
@@ -18,23 +19,13 @@ public class XORCard extends ExtractorCard{
     }
     @Override
     public void execute() {
+        FileManager fm = new FileManager();
+        File input = fm.setupInput(inputField.getText());
+        File output = fm.setupOutput(input.getName(), outputField.getText(), "_xor.txt");
         try {
-            File input = new File(inputField.getText());
-            String fileName = input.getName();
-            int dotIndex = fileName.lastIndexOf('.');
-            if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
-                fileName = fileName.substring(0, dotIndex);
-            }
-            String path = outputField.getText() + "\\" + fileName + "_xor.txt";
-            System.out.println(path + " created!");
-            File output = new File(path);
-
-            if (!output.exists()) {
-                output.createNewFile();
-            }
-
             FileInputStream fileInput = new FileInputStream(input);
             FileWriter writer = new FileWriter(output, false);
+
             int r;
             boolean haveFirst = false;
             int n1 = 0;
@@ -49,7 +40,7 @@ public class XORCard extends ExtractorCard{
                     haveFirst = false;
                     n2 = c-48;
                     r = n1 ^ n2;
-                    writer.write(r);
+                    writer.write(r+48);
                 }
             }
             fileInput.close();
