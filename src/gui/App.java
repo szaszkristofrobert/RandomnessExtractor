@@ -25,6 +25,7 @@ public class App {
     private JPanel NISTIFrame;
     private JPanel panelExtractorCheckBoxes;
     private JCheckBox XORCheckBox;
+    private JCheckBox ShiftXORCheckBox;
     private JCheckBox VNCheckBox;
     private JCheckBox IVNCheckBox;
     private JCheckBox NVNCheckBox;
@@ -56,7 +57,7 @@ public class App {
     private boolean[] nistTicks;
 
     Card[] nistCards = {new FrequencyCard(this), new BlockFrequencyCard(this), new CumulativeSumsCard(this), new RunsCard(this), new LongestRunCard(this), new RankCard(this), new DFTCard(this), new NTCard(this), new OTCard(this), new USCard(this), new AECard(this), new RECard(this), new REVCard(this), new SCard(this), new LCCard(this)};
-    Card[] extractorCards = {new XORCard(this), new VNCard(this), new IVNCard(this), new NVNCard(this), new HFCard(this), new HashCard(this), new SBCard(this)};
+    Card[] extractorCards = {new XORCard(this), new VNCard(this), new IVNCard(this), new NVNCard(this), new HFCard(this), new HashCard(this), new SBCard(this), new ShiftXORCard(this)};
 
     public App(){
         frame = new JFrame("App");
@@ -71,7 +72,7 @@ public class App {
     }
 
     public void setup(){
-        extractorsReady = new boolean[]{true, true, true, true, true, true, true};
+        extractorsReady = new boolean[]{true, true, true, true, true, true, true, true};
         nistReady = new boolean[]{true, true, true, true, true, true, true, true, true, true, true, true, true, true, true};
         setupExtractorCheckboxes();
         setupCheckBoxButton(panelExtractorCheckBoxes, extractorCheckBoxes, false);
@@ -82,8 +83,8 @@ public class App {
 
     public void setupExtractorCheckboxes(){
         panelExtractorCheckBoxes.setLayout(new BoxLayout(panelExtractorCheckBoxes, BoxLayout.Y_AXIS));
-        extractorCheckBoxes = new JCheckBox[]{XORCheckBox, VNCheckBox, IVNCheckBox, NVNCheckBox, HFCheckBox, HashCheckBox, SBCheckBox};
-        String[] labels = {"XOR", "Von Neumann", "Iterating VN", "N bit VN", "H function", "Hash", "S-box"};
+        extractorCheckBoxes = new JCheckBox[]{XORCheckBox, VNCheckBox, IVNCheckBox, NVNCheckBox, HFCheckBox, HashCheckBox, SBCheckBox, ShiftXORCheckBox};
+        String[] labels = {"XOR", "Von Neumann", "Iterating VN", "N bit VN", "H function", "Hash", "S-box", "Shift XOR"};
         checkBoxSetup(panelExtractorCheckBoxes, extractorCheckBoxes, labels);
     }
 
