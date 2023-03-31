@@ -131,8 +131,10 @@ public class App {
                 for (int i = 0; i < extractorCards.length; i++) {
                     if (extractorTicks[i]) {
                         extractorCards[i].execute();
+                        System.out.println(extractorCards[i].label + " done!");
                     }
                 }
+                System.out.println("All extractors done!");
             }
             else
                 System.out.println("Not all extractors were set up.");

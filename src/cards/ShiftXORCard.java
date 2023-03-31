@@ -15,7 +15,8 @@ public class ShiftXORCard extends ExtractorCard{
     public ShiftXORCard(App app){
         super(app);
         this.n = 8;
-        JLabel label = new JLabel("Shift XOR");
+        this.label = "Shift XOR";
+        JLabel label = new JLabel(this.label);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         settingsPanel.setLayout(new BoxLayout(settingsPanel, BoxLayout.Y_AXIS));

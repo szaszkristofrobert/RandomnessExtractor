@@ -1,6 +1,8 @@
 package file_manager;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileManager {
@@ -30,5 +32,29 @@ public class FileManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void copyContent(File a, File b)
+            throws IOException
+    {
+        FileInputStream in = new FileInputStream(a);
+        FileOutputStream out = new FileOutputStream(b);
+
+        try {
+
+            int n;
+            while ((n = in.read()) != -1) {
+                out.write(n);
+            }
+        }
+        finally {
+            if (in != null) {
+                in.close();
+            }
+            if (out != null) {
+                out.close();
+            }
+        }
+        System.out.println("File Copied");
     }
 }

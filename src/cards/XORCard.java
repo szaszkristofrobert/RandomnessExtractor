@@ -13,7 +13,8 @@ public class XORCard extends ExtractorCard{
     public XORCard(App app){
         super(app);
         this.n = 1;
-        JLabel label = new JLabel("XOR");
+        this.label = "XOR";
+        JLabel label = new JLabel(this.label);
         this.add(label);
         this.add(buttonContinue);
     }

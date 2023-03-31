@@ -13,7 +13,8 @@ public class VNCard extends ExtractorCard{
     public VNCard(App app){
         super(app);
         this.n = 2;
-        JLabel label = new JLabel("VN");
+        this.label = "VN";
+        JLabel label = new JLabel(this.label);
         this.add(label);
         this.add(buttonContinue);
     }

@@ -8,6 +8,7 @@ import java.awt.*;
 
 public abstract class Card extends JPanel {
     protected int n;
+    public String label;
     App app;
     JButton buttonContinue;
     JTextField inputField;
