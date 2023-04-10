@@ -79,6 +79,70 @@ public class App {
         setupNISTCheckBoxes();
         setupCheckBoxButton(panelNISTCheckBoxes, nistCheckBoxes, true);
         setupExtractorRunButton();
+        setupExtractorBrowseButtons();
+        setupNISTBrowseButtons();
+    }
+
+    public void setupExtractorBrowseButtons(){
+        ExtractorInputBrowseButton.addActionListener(e ->{
+            JFileChooser chooser= new JFileChooser();
+            chooser.setApproveButtonText("Choose file");
+
+            int choice = chooser.showOpenDialog(null);
+
+            if (choice != JFileChooser.APPROVE_OPTION) return;
+
+            File chosenFile = chooser.getSelectedFile();
+
+            textFieldExtractorInput.setText(chosenFile.getAbsolutePath());
+        });
+
+        ExtractorOutputBrowseButton.addActionListener(e -> {
+            JFileChooser chooser= new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setApproveButtonText("Choose directory");
+
+
+
+            int choice = chooser.showOpenDialog(null);
+
+            if (choice != JFileChooser.APPROVE_OPTION) return;
+
+            File chosenDirectory = chooser.getSelectedFile();
+
+            textFieldExtractorOutput.setText(chosenDirectory.getAbsolutePath());
+        });
+    }
+
+    public void setupNISTBrowseButtons(){
+        NISTInputBrowseButton.addActionListener(e ->{
+            JFileChooser chooser= new JFileChooser();
+            chooser.setApproveButtonText("Choose file");
+
+            int choice = chooser.showOpenDialog(null);
+
+            if (choice != JFileChooser.APPROVE_OPTION) return;
+
+            File chosenFile = chooser.getSelectedFile();
+
+            textFieldNISTInput.setText(chosenFile.getAbsolutePath());
+        });
+
+        NISTOutputBrowseButton.addActionListener(e -> {
+            JFileChooser chooser= new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setApproveButtonText("Choose directory");
+
+
+
+            int choice = chooser.showOpenDialog(null);
+
+            if (choice != JFileChooser.APPROVE_OPTION) return;
+
+            File chosenDirectory = chooser.getSelectedFile();
+
+            textFieldNISTOutput.setText(chosenDirectory.getAbsolutePath());
+        });
     }
 
     public void setupExtractorCheckboxes(){
