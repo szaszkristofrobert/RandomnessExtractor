@@ -37,13 +37,8 @@ public class IVNCard extends ExtractorCard{
     @Override
     public void execute() {
         int iterations = -1;
-        try {
-            if (Integer.parseInt(iField.getText()) > 0) {
-                iterations = Integer.parseInt(iField.getText());
-            }
-        }
-        catch (Error e){
-            e.printStackTrace();
+        if (Integer.parseInt(iField.getText()) > 0) {
+            iterations = Integer.parseInt(iField.getText());
         }
 
         FileManager fm = new FileManager();
