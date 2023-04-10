@@ -156,7 +156,7 @@
                   <component id="adcb1" class="javax.swing.JTextField" binding="textFieldNISTInput">
                     <constraints border-constraint="Center"/>
                     <properties>
-                      <text value="nist input file location"/>
+                      <text value="nist input file"/>
                       <toolTipText value=""/>
                     </properties>
                   </component>
