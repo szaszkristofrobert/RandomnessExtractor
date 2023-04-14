@@ -191,6 +191,7 @@ public class App {
 
     public void setupExtractorRunButton(){
         ExtractorRunButton.addActionListener(e -> {
+            wipeLossLog();
             if (allFalse(extractorsReady)) {
                 for (int i = 0; i < extractorCards.length; i++) {
                     if (extractorTicks[i]) {
@@ -203,6 +204,20 @@ public class App {
             else
                 System.out.println("Not all extractors were set up.");
         });
+    }
+
+    public void wipeLossLog(){
+        File file = new File(textFieldExtractorOutput.getText() + "\\extractorLosses.txt");
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            PrintWriter writer = new PrintWriter(file);
+            writer.print("");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean allFalse(boolean[] array){

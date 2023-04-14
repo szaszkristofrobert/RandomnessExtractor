@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Objects;
 
 public class IVNCard extends ExtractorCard{
     private JTextField iField;
@@ -14,6 +15,7 @@ public class IVNCard extends ExtractorCard{
         super(app);
         this.n = 3;
         this.label = "IVN";
+        this.fileNameEnding = "_ivn.txt";
         JLabel label = new JLabel(this.label);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -36,14 +38,16 @@ public class IVNCard extends ExtractorCard{
     }
     @Override
     public void execute() {
-        int iterations = -1;
-        if (Integer.parseInt(iField.getText()) > 0) {
+        int iterations;
+        if (Objects.equals(iField.getText(), "inf"))
+            iterations = Integer.MAX_VALUE;
+        else
             iterations = Integer.parseInt(iField.getText());
-        }
+
 
         FileManager fm = new FileManager();
         File input = fm.setupInput(inputField.getText());
-        File output = fm.setupOutput(input.getName(), outputField.getText(), "_ivn.txt");
+        File output = fm.setupOutput(input.getName(), outputField.getText(), fileNameEnding);
 
         File iteratingInput = fm.setupOutput(input.getName(), outputField.getText(), "_iterating_input.txt");
         File discarded = fm.setupOutput(input.getName(), outputField.getText(), "_discarded.txt");
@@ -93,5 +97,6 @@ public class IVNCard extends ExtractorCard{
         catch (SecurityException e){
             e.printStackTrace();
         }
+        logLosses();
     }
 }

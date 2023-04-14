@@ -12,14 +12,9 @@ public class FileManager {
 
     public File setupOutput(String inputName, String outputLocation, String ending){
         try {
-            String fileName = inputName;
-            int dotIndex = fileName.lastIndexOf('.');
-            if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
-                fileName = fileName.substring(0, dotIndex);
-            }
-            String path = outputLocation + "\\" + fileName + ending;
-            System.out.println(path + " created!");
+            String path = getFilePath(inputName, outputLocation, ending);
             File output = new File(path);
+            System.out.println(path + " created!");
 
             if (!output.exists()) {
                 output.createNewFile();
@@ -32,6 +27,15 @@ public class FileManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String getFilePath(String inputName, String outputLocation, String ending){
+        String fileName = inputName;
+        int dotIndex = fileName.lastIndexOf('.');
+        if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
+            fileName = fileName.substring(0, dotIndex);
+        }
+        return outputLocation + "\\" + fileName + ending;
     }
 
     public void copyContent(File a, File b)
