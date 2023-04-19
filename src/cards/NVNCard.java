@@ -17,7 +17,8 @@ public class NVNCard extends ExtractorCard{
         super(app);
         this.n = 4;
         this.label = "NVN";
-        this.fileNameEnding = "_nvn.txt";
+        this.txtFileNameEnding = "_nvn.txt";
+        this.binFileNameEnding = "_nvn.bin";
         JLabel label = new JLabel(this.label);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -44,7 +45,7 @@ public class NVNCard extends ExtractorCard{
 
         FileManager fm = new FileManager();
         File input = fm.setupInput(inputField.getText());
-        File output = fm.setupOutput(input.getName(), outputField.getText(), fileNameEnding);
+        File output = fm.setupOutput(input.getName(), outputField.getText(), txtFileNameEnding);
 
         try {
             FileInputStream fileInput = new FileInputStream(input);
@@ -78,6 +79,7 @@ public class NVNCard extends ExtractorCard{
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        fm.toBinaryFile(output, input.getName(), outputField.getText(), binFileNameEnding);
         logLosses();
     }
 

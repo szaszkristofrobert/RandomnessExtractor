@@ -15,7 +15,8 @@ public class IVNCard extends ExtractorCard{
         super(app);
         this.n = 3;
         this.label = "IVN";
-        this.fileNameEnding = "_ivn.txt";
+        this.txtFileNameEnding = "_ivn.txt";
+        this.binFileNameEnding = "_ivn.bin";
         JLabel label = new JLabel(this.label);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -47,7 +48,7 @@ public class IVNCard extends ExtractorCard{
 
         FileManager fm = new FileManager();
         File input = fm.setupInput(inputField.getText());
-        File output = fm.setupOutput(input.getName(), outputField.getText(), fileNameEnding);
+        File output = fm.setupOutput(input.getName(), outputField.getText(), txtFileNameEnding);
 
         File iteratingInput = fm.setupOutput(input.getName(), outputField.getText(), "_iterating_input.txt");
         File discarded = fm.setupOutput(input.getName(), outputField.getText(), "_discarded.txt");
@@ -97,6 +98,7 @@ public class IVNCard extends ExtractorCard{
         catch (SecurityException e){
             e.printStackTrace();
         }
+        fm.toBinaryFile(output, input.getName(), outputField.getText(), binFileNameEnding);
         logLosses();
     }
 }

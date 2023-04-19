@@ -14,7 +14,8 @@ public class VNCard extends ExtractorCard{
         super(app);
         this.n = 2;
         this.label = "VN";
-        this.fileNameEnding = "_vn.txt";
+        this.txtFileNameEnding = "_vn.txt";
+        this.binFileNameEnding = "_vn.bin";
         JLabel label = new JLabel(this.label);
         this.add(label);
         this.add(buttonContinue);
@@ -23,7 +24,7 @@ public class VNCard extends ExtractorCard{
     public void execute() {
         FileManager fm = new FileManager();
         File input = fm.setupInput(inputField.getText());
-        File output = fm.setupOutput(input.getName(), outputField.getText(), fileNameEnding);
+        File output = fm.setupOutput(input.getName(), outputField.getText(), txtFileNameEnding);
         try {
             FileInputStream fileInput = new FileInputStream(input);
             FileWriter writer = new FileWriter(output, false);
@@ -53,6 +54,7 @@ public class VNCard extends ExtractorCard{
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        fm.toBinaryFile(output, input.getName(), outputField.getText(), binFileNameEnding);
         logLosses();
     }
 }

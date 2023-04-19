@@ -14,7 +14,8 @@ public class XORCard extends ExtractorCard{
         super(app);
         this.n = 1;
         this.label = "XOR";
-        this.fileNameEnding = "_xor.txt";
+        this.txtFileNameEnding = "_xor.txt";
+        this.binFileNameEnding = "_xor.bin";
         JLabel label = new JLabel(this.label);
         this.add(label);
         this.add(buttonContinue);
@@ -23,7 +24,7 @@ public class XORCard extends ExtractorCard{
     public void execute() {
         FileManager fm = new FileManager();
         File input = fm.setupInput(inputField.getText());
-        File output = fm.setupOutput(input.getName(), outputField.getText(), fileNameEnding);
+        File output = fm.setupOutput(input.getName(), outputField.getText(), txtFileNameEnding);
         try {
             FileInputStream fileInput = new FileInputStream(input);
             FileWriter writer = new FileWriter(output, false);
@@ -52,6 +53,7 @@ public class XORCard extends ExtractorCard{
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        fm.toBinaryFile(output, input.getName(), outputField.getText(), binFileNameEnding);
         logLosses();
     }
 }

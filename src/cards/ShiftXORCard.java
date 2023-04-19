@@ -16,7 +16,8 @@ public class ShiftXORCard extends ExtractorCard{
         super(app);
         this.n = 8;
         this.label = "Shift XOR";
-        this.fileNameEnding = "_shiftxor.txt";
+        this.txtFileNameEnding = "_shiftxor.txt";
+        this.binFileNameEnding = "_shiftxor.bin";
         JLabel label = new JLabel(this.label);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -46,7 +47,7 @@ public class ShiftXORCard extends ExtractorCard{
 
         FileManager fm = new FileManager();
         File input = fm.setupInput(inputField.getText());
-        File output = fm.setupOutput(input.getName(), outputField.getText(), fileNameEnding);
+        File output = fm.setupOutput(input.getName(), outputField.getText(), txtFileNameEnding);
         try {
             FileInputStream fileInput = new FileInputStream(input);
             FileWriter writer = new FileWriter(output, false);
@@ -68,6 +69,7 @@ public class ShiftXORCard extends ExtractorCard{
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        fm.toBinaryFile(output, input.getName(), outputField.getText(), binFileNameEnding);
         logLosses();
     }
 }

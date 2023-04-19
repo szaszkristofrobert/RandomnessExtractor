@@ -15,7 +15,8 @@ import java.nio.file.StandardOpenOption;
 public abstract class Card extends JPanel {
     protected int n;
     public String label;
-    protected String fileNameEnding;
+    protected String txtFileNameEnding;
+    protected String binFileNameEnding;
     App app;
     JButton buttonContinue;
     JTextField inputField;
@@ -46,8 +47,8 @@ public abstract class Card extends JPanel {
         try {
             File input = new File(inputField.getText());
             double originalSize = (double) Files.size(Paths.get(inputField.getText()));
-            double sizeAfterExtractor = (double) Files.size(Paths.get(fm.getFilePath(input.getName(), outputField.getText(), fileNameEnding)));
-            double efficiency = sizeAfterExtractor / originalSize;
+            double sizeAfterExtractor = (double) Files.size(Paths.get(fm.getFilePath(input.getName(), outputField.getText(), binFileNameEnding)));
+            double efficiency = (sizeAfterExtractor * 8) / originalSize;
             Files.write(
                     Paths.get(outputField.getText() + "\\extractorLosses.txt"),
                     (this.label + ": " + efficiency + "\n").getBytes(),
