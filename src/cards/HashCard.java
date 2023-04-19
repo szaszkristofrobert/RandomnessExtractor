@@ -48,7 +48,7 @@ public class HashCard extends ExtractorCard{
 
                 if (bitCounter == 8){
                     //write one byte into toHash file
-                    byte byteToWrite = (byte)funny_function(oneByte);
+                    byte byteToWrite = (byte)fm.funny_function(oneByte);
                     toHashWriter.write(byteToWrite);
 
                     byteCounter++;
@@ -81,16 +81,6 @@ public class HashCard extends ExtractorCard{
             e.printStackTrace();
         }
         logLosses();
-    }
-
-    private char funny_function(int[] bit_array)
-    {
-        char result = 0;
-        for(int i = 0; i < 8; i++)
-        {
-            result |= bit_array[i] << (7-i);
-        }
-        return result;
     }
 
     private byte[] createSha1(File file) throws Exception  {

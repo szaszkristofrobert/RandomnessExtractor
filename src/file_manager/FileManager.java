@@ -93,7 +93,7 @@ public class FileManager {
         }
     }
 
-    private char funny_function(int[] bit_array)
+    public char funny_function(int[] bit_array)
     {
         char result = 0;
         for(int i = 0; i < 8; i++)
