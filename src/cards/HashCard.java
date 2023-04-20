@@ -5,9 +5,7 @@ import gui.App;
 
 import javax.swing.*;
 import java.io.*;
-import java.nio.file.Files;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class HashCard extends ExtractorCard{

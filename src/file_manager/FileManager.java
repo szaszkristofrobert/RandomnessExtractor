@@ -102,4 +102,14 @@ public class FileManager {
         }
         return result;
     }
+
+    public char convertToHex(int[] bits) throws IllegalArgumentException {
+
+        int decimal = 0;
+        for (int i = 0; i < 4; i++) {
+            decimal = decimal * 2 + bits[i];
+        }
+
+        return Integer.toHexString(decimal).charAt(0);
+    }
 }
