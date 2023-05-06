@@ -8,12 +8,11 @@ public class RunsCard extends NISTCard{
     public RunsCard(App app){
         super(app);
         this.n = 4;
-        JLabel label = new JLabel("Runs");
+        this.label = "Runs";
+        JLabel label = new JLabel(this.label);
         this.add(label);
         this.add(buttonContinue);
     }
     @Override
-    public void execute() {
-        //TODO
-    }
+    public void execute() {}
 }

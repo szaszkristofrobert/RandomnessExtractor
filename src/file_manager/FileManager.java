@@ -3,6 +3,52 @@ package file_manager;
 import java.io.*;
 
 public class FileManager {
+    public File nistRunnerFile;
+
+    public void runNIST() throws IOException{
+        Runtime.getRuntime().exec("./" + nistRunnerFile.getName());
+    }
+
+    public void setupNistRunner() {
+        String root = System.getProperty("user.dir");
+
+        File nistrunnerfile = new File(root + "\\src\\nist\\run_nist.sh");
+        try {
+            if (!nistrunnerfile.exists())
+                nistrunnerfile.createNewFile();
+        }
+        catch (IOException e){
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        nistRunnerFile = nistrunnerfile;
+    }
+
+    public void wipeNistRunner(){
+        try {
+            PrintWriter writer = new PrintWriter(nistRunnerFile);
+            writer.print("");
+            writer.close();
+        }
+        catch (FileNotFoundException e){
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public void appendNistRunner(String text){
+        try {
+            FileWriter writer = new FileWriter(nistRunnerFile, true);
+
+            writer.write(text);
+            writer.close();
+        }
+        catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
     public File setupInput(String location){
         return new File(location);
     }

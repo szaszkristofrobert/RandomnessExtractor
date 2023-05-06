@@ -1,9 +1,12 @@
 package gui;
 
 import cards.*;
+import file_manager.FileManager;
 
 import javax.swing.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class App {
@@ -80,6 +83,7 @@ public class App {
         setupCheckBoxButton(panelNISTCheckBoxes, nistCheckBoxes, true);
         setupExtractorRunButton();
         setupExtractorBrowseButtons();
+        setupNISTRunButton();
         setupNISTBrowseButtons();
     }
 
@@ -178,8 +182,8 @@ public class App {
             }
             System.out.println(Arrays.toString(ticks));
             if (nist) {
-                nistTicks = ticks;
-                nistReady = ticks;
+                nistTicks = ticks.clone();
+                nistReady = ticks.clone();
             }
             else {
                 extractorTicks = ticks.clone();
@@ -204,6 +208,70 @@ public class App {
             else
                 System.out.println("Not all extractors were set up.");
         });
+    }
+
+    public void setupNISTRunButton(){
+        NISTRunButton.addActionListener(e -> {
+            try {
+                FileManager fm = new FileManager();
+                fm.setupNistRunner();
+                fm.wipeNistRunner();
+                int[] SettableTests = {1, 7, 8, 10, 13, 14};
+                String nistTickString = "";
+                for (int i = 0; i < nistTicks.length; i++) {
+                    if (nistTicks[i])
+                        nistTickString += "1";
+                    else
+                        nistTickString += "0";
+                }
+                fm.appendNistRunner(
+                    "#!/bin/sh\n" +
+                    "./assess 100000 <<EOF\n" +
+                    "0\n" +
+                    textFieldNISTInput.getText() + "\n" +
+                    "0\n" +
+                    nistTickString + "\n"
+                );
+                int counter = 1;
+                if (allFalse(nistReady)) {
+                   for (int i = 0; i < nistCards.length; i++) {
+                       if (nistTicks[i]) {
+                           if(contains(SettableTests, i)) {
+                               fm.appendNistRunner(counter + "\n");
+                               counter++;
+                           }
+                           nistCards[i].execute();
+                           System.out.println(nistCards[i].label + " done!");
+                       }
+                   }
+                   System.out.println("All tests done!");
+                }
+                else
+                    System.out.println("Not all tests were set up");
+                double bits = 8 * (double) Files.size(Paths.get(textFieldNISTInput.getText()));
+                int bitStreams = (int) bits / 100000;
+
+                fm.appendNistRunner(
+                    "0\n" +
+                    bitStreams + "\n" +
+                    "1\n" +
+                    "EOF"
+                );
+                fm.runNIST();
+            }
+            catch (IOException exception) {
+                System.out.println("An error occurred.");
+                exception.printStackTrace();
+            }
+        });
+    }
+
+    private boolean contains(int[] array, int number){
+        for (int n : array
+             ) {
+            if (n == number) return true;
+        }
+        return false;
     }
 
     public void wipeLossLog(){

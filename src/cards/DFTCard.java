@@ -8,12 +8,11 @@ public class DFTCard extends NISTCard{
     public DFTCard(App app){
         super(app);
         this.n = 7;
-        JLabel label = new JLabel("Discrete Fourier Transform");
+        this.label = "Discrete Fourier Transform";
+        JLabel label = new JLabel(this.label);
         this.add(label);
         this.add(buttonContinue);
     }
     @Override
-    public void execute() {
-        //TODO
-    }
+    public void execute() {}
 }

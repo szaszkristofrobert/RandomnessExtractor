@@ -11,6 +11,6 @@ public abstract class NISTCard extends Card{
     @Override
     public void nextCard(){
         app.displayNextNISTCard(n);
-        app.nistReady[n] = false;
+        app.nistReady[n-1] = false;
     }
 }
